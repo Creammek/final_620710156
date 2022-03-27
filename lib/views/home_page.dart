@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:final_620710156/model/Quiz.dart';
 import 'package:final_620710156/service/api.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Quiz>? quiz_list;
   int count = 0;
-  int wrong_guess = 0;
-  String message = "";
+  int wrong = 0;
+  String m= "";
 
   @override
   void initState() {
@@ -33,30 +32,30 @@ class _HomePageState extends State<HomePage> {
   void guess(String choice) {
     setState(() {
       if (quiz_list![count].answer == choice) {
-        message = "สุดยอดเลย👍🎉";
+        m = "สุดยอดเลย👍🎉";
       } else {
-        message = "ทายผิด ทายอีกครั้ง🤔";
+        m = "ทายผิด ทายอีกครั้ง🤔";
       }
     });
     Timer timer = Timer(Duration(seconds: 2), () {
       setState(() {
-        message = "";
+        m = "";
         if (quiz_list![count].answer == choice) {
           count++;
         } else {
-          wrong_guess++;
+          wrong++;
         }
       });
     });
   }
 
   Widget printGuess() {
-    if (message.isEmpty) {
+    if (m.isEmpty) {
       return SizedBox(height: 20, width: 10);
-    } else if (message == "สุดยอดเลย👍🎉") {
-      return Text(message);
+    } else if (m == "สุดยอดเลย👍🎉") {
+      return Text(m);
     } else {
-      return Text(message);
+      return Text(m);
     }
   }
 
@@ -79,13 +78,13 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text('End Game'),
-            Text('ทายผิด ${wrong_guess} ครั้ง😡'),
+            Text('ทายผิด ${wrong} ครั้ง😡'),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    wrong_guess = 0;
+                    wrong = 0;
                     count = 0;
                     quiz_list = null;
                     _fetch();
@@ -110,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             Image.network(quiz_list![count].image_url, fit: BoxFit.cover),
             Column(
               children: [
-                for (int i = 0; i < quiz_list![count].choices.length; i++)
+                for (int i = 0; i < quiz_list![count].choice_list.length; i++)
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -118,8 +117,8 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () =>
-                                guess(quiz_list![count].choices[i].toString()),
-                            child: Text(quiz_list![count].choices[i]),
+                                guess(quiz_list![count].choice_list[i].toString()),
+                            child: Text(quiz_list![count].choice_list[i]),
                           ),
                         ),
                       ],
