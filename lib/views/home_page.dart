@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   void guess(String choice) {
     setState(() {
-      if (quiz_list![count].answer == choice) {
+      if (quiz_list![count].choice_list[quiz_list![count].answer] == choice) {
         m = "สุดยอดเลย👍🎉";
       } else {
         m = "ทายผิด ทายอีกครั้ง🤔";
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
     Timer timer = Timer(Duration(seconds: 2), () {
       setState(() {
         m = "";
-        if (quiz_list![count].answer == choice) {
+        if (quiz_list![count].choice_list[quiz_list![count].answer] == choice) {
           count++;
         } else {
           wrong++;

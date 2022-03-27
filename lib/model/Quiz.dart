@@ -1,6 +1,6 @@
 class Quiz{
   final String image_url;
-  final String answer;
+  final int answer;
   final List choice_list;
 
   Quiz({
