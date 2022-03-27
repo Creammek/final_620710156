@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:final_620710156/model/Quiz.dart';
+import 'package:final_620710156/model/Q.dart';
 import 'package:final_620710156/service/api.dart';
 import 'package:flutter/material.dart';
 
