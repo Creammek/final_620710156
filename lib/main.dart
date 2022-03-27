@@ -1,4 +1,4 @@
-import 'package:final_620710156/views/home_page.dart';
+import 'package:final_620710156/views/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
